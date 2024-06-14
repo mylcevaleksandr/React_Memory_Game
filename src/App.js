@@ -1,6 +1,7 @@
 import './App.css';
 import React from "react";
 import config from "./config";
+import {Card} from "./components/Card";
 
 class App extends React.Component {
     constructor() {
@@ -14,17 +15,21 @@ class App extends React.Component {
     prepareCards() {
         let arrOfCards = [...config.cards, ...config.cards];
         let currentIndex = arrOfCards.length;
+
         while (currentIndex !== 0) {
             let randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex--;
             [arrOfCards[currentIndex], arrOfCards[randomIndex]] = [arrOfCards[randomIndex], arrOfCards[currentIndex]];
-
         }
-        return arrOfCards;
+        const sortedArrOfCards = arrOfCards.map((obj, index) => ({...obj, id: index + 1}));
+        return sortedArrOfCards;
+    }
+
+    choiceCardHandler(card) {
+        console.log(card.name);
     }
 
     render() {
-        console.log(this.state.cards);
         return (
             <div className="App">
                 <header className="header">
@@ -37,9 +42,7 @@ class App extends React.Component {
                     <div className="cards">
                         {
                             this.state.cards.map(item => (
-                                <div className="card" key={item.id}>
-                                    <img src={'/images/' + item.image} alt={item.name}/>
-                                </div>
+                                <Card item={item} key={item.id} onChoice={this.choiceCardHandler}/>
                             ))
                         }
                     </div>

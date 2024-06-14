@@ -27,7 +27,7 @@ const config = {
         },
         {
             id: 6,
-            name: 'morty-smith.svg',
+            name: 'morty-smith',
             image: 'morty-smith.svg',
         },
         {
